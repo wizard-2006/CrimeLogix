@@ -21,6 +21,7 @@ import officerRouter from "./routes/officerRouter.js";
 import evidenceRouter from "./routes/evidenceRouter.js";
 import caseRouter from "./routes/caseRouter.js";
 import recordRouter from "./routes/recordRouter.js";
+config({ path: "./config/config.env" });
 
 // ES module URL support
 const __filename = fileURLToPath(import.meta.url);
@@ -53,7 +54,6 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express();
 
 // Load environment variables
-config({ path: "./config/config.env" });
 
 // Security Middlewares
 app.use(helmet({
@@ -87,6 +87,7 @@ app.use(cors({
   maxAge: 86400
 }));
 
+app.set('trust proxy', 1);
 // Regular Middlewares
 app.use(cookieParser());
 app.use(express.json({ limit: '50mb' }));
@@ -130,7 +131,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'public')));
   
   // Trust first proxy
-  app.set('trust proxy', 1);
   
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
