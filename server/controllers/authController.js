@@ -1,7 +1,7 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/errormiddlewares.js";
 import db from "../database/db.js"; // mysql2 connection pool
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { sendVerificationCode } from "../utils/sendVerificationCode.js";
 import { sendToken } from "../utils/sendToken.js";
